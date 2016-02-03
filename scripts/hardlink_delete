@@ -1,0 +1,15 @@
+#!/bin/sh
+
+echo "-------------------------------------------------------------------" >> /home/$USER/.session/inode.log
+for inode in $(ls -i "$1" | cut -d" " -f1)
+do
+        echo "Traitement Inode $inode | Fichier $(find /home/ -inum $inode)" >> /home/$USER/.session/inode.log
+        find /home/ -inum $inode -exec rm "{}" \;
+done
+
+if [ -d "$1" ]
+then
+        echo "-------> Traitement Dossier $1" >> /home/$USER/.session/inode.log
+        rmdir "$1"
+fi
+echo "-------------------------------------------------------------------" >> /home/$USER/.session/inode.log
