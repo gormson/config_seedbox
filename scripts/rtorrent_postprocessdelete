@@ -1,0 +1,9 @@
+#!/bin/bash
+
+sh /home/$USER/.filebot/filebot.sh -script fn:cleaner  /home/$USER/termines/vrac &
+sh /home/$USER/.filebot/filebot.sh -script fn:cleaner  /home/$USER/termines/tv_vf &
+sh /home/$USER/.filebot/filebot.sh -script fn:cleaner  /home/$USER/termines/tv_vo &
+sh /home/$USER/.filebot/filebot.sh -script fn:cleaner  /home/$USER/termines/movie_hd &
+sh /home/$USER/.filebot/filebot.sh -script fn:cleaner  /home/$USER/termines/movie_vrac &
+sh /home/$USER/.filebot/filebot.sh -script fn:cleaner  /home/$USER/termines/movie_kids &
+sh /home/$USER/.filebot/filebot.sh -script fn:cleaner  /home/$USER/termines/Unpassed &
