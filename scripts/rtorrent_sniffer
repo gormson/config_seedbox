@@ -1,0 +1,16 @@
+#!/bin/bash
+
+source /opt/config_seedbox/pushover.list
+
+TORRENT_NAME=$1
+TORRENT_LABEL=$2
+
+MESSAGE="($TORRENT_LABEL) $TORRENT_NAME"
+TITRE="Rapport : $USER"
+
+curl -s \
+  --form-string "token=$APP_TOKEN" \
+  --form-string "user=$USER_KEY" \
+  --form-string "message=$MESSAGE" \
+  --form-string "title=$TITRE" \
+  https://api.pushover.net/1/messages.json
