@@ -20,11 +20,22 @@ do
 	mkdir "$BASEPATH"/termines/Unsorted
 	mkdir "$BASEPATH"/termines/vrac
 
-	cp rtorrent_postprocess "$BASEPATH"
-	cp rtorrent-postprocessdelete "$BASEPATH"
-	cp hardlink_delete "$BASEPATH"
-
-	cp /home/rootgorm/rtorrent_postprocess "$BASEPATH"/rtorrent_postprocess
-	cp /home/rootgorm/rtorrent_sniffer "$BASEPATH"/rtorrent_sniffer
+	chown -R "$utilisateur":"$utilisateur" "$BASEPATH"/termines/
+	
+	cp ./scripts/rtorrent_postprocess "$BASEPATH"
+	chown -R "$utilisateur":"$utilisateur" "$BASEPATH"/rtorrent_postprocess
+	chmod +x "$BASEPATH"/rtorrent_postprocess
+	
+	cp ./scripts/rtorrent-postprocessdelete "$BASEPATH"
+	chown -R "$utilisateur":"$utilisateur" "$BASEPATH"/rtorrent-postprocessdelete
+	chmod +x "$BASEPATH"/rtorrent-postprocessdelete
+	
+	cp ./scripts/hardlink_delete "$BASEPATH"
+	chown -R "$utilisateur":"$utilisateur" "$BASEPATH"/hardlink_delete
+	chmod +x "$BASEPATH"/hardlink_delete
+	
+	cp ./scripts/rtorrent_sniffer "$BASEPATH"/rtorrent_sniffer
+	chown -R "$utilisateur":"$utilisateur" "$BASEPATH"/rtorrent_sniffer
+	chmod +x "$BASEPATH"/rtorrent_sniffer
 
 done < "${1}"
