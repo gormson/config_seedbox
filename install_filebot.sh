@@ -2,7 +2,7 @@
 
 while IFS="" read -r utilisateur || [[ -n "$utilisateur" ]]
 do
-  cp -R filebot /home/"$utilisateur"/.filebot
+  cp -R /tmp/filebot /home/"$utilisateur"/.filebot
   chown -R "$utilisateur":"$utilisateur" /home/"$utilisateur"/.filebot
   
   chmod a+x /home/"$utilisateur"/.filebot/filebot.sh
