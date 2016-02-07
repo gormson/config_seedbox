@@ -31,7 +31,7 @@ do
 	find /home/"$utilisateur"/torrents/ -type f -exec chmod 664 {} \;
 	find /home/"$utilisateur"/torrents/ -type d -exec chmod 775 {} \;
 
-	echo "system.method.set_key = event.download.finished,update_file,\"execute=/home/$utilisateur/.session/file_torrent.sh\"" >> /home/"$utilisateur"/.rtorrent.rc
+	#echo "system.method.set_key = event.download.finished,update_file,\"execute=/home/$utilisateur/.session/file_torrent.sh\"" >> /home/"$utilisateur"/.rtorrent.rc
 	
 	cp /tmp/file_torrent.sh /home/"$utilisateur"/.session/file_torrent.sh
 	chmod +x /home/"$utilisateur"/.session/file_torrent.sh
