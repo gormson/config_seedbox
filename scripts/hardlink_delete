@@ -1,15 +1,79 @@
-#!/bin/sh
+#!/bin/bash
 
-echo "-------------------------------------------------------------------" >> /home/$USER/.session/inode.log
+#########################################################################
+#									#
+# Script : hardlink_delete.sh						#
+# Description : Supprime un fichier ou un dossier à partir de son inode	#
+#		permet donc de supprimer aussi les hardlinks		#
+# Input : $1 - fichier ou dossier à supprimer				#
+#									#
+# Auteur : GorMsoN							#
+#                                                                       #
+#########################################################################
+
 for inode in $(ls -i "$1" | cut -d" " -f1)
 do
-        echo "Traitement Inode $inode | Fichier $(find /home/ -inum $inode)" >> /home/$USER/.session/inode.log
-        find /home/ -inum $inode -exec rm "{}" \;
+
+	#Si l'inode correspond à un sous dossier on relance hardlink_delete (recursif mode engaged)
+	if [ -d "$(find /home/ -inum "$inode")" ]
+	then
+
+		/home/$USER/hardlink_delete "$(find /home/ -inum "$inode")"
+
+		#Verification de la bonne suppression du fichier
+		if [ -d "$(find /home/ -inum "$inode")" ]
+		then
+		        {	
+		                echo "Date : $(date)" 
+			        echo "Type : Erreur de suppression du sous-dossier" 
+			        echo "Sous-Dossier :  $(find /home/ -inum "$inode")" 
+			        echo "___________________________________________________________________________________" 
+			        } >> /home/$USER/.session/Hardlink.log
+		fi
+
+	#Si l'inode correspond à un fichier standard on le supprime de manière classique
+	else
+
+	        {
+	                echo "Date : $(date)"
+		        echo "Type : Suppression Inode $inode"
+		        echo "Fichier :  $(find /home/ -inum "$inode")"
+		        } >> /home/$USER/.session/Hardlink.log
+        	find /home/ -inum "$inode" -exec rm "{}" \;
+
+		#Verification de la bonne suppression du fichier
+		if [ -f "$1" ]
+		then
+			{
+			        echo "Date : $(date)"
+			        echo "Type : Erreur de suppression du fichier"
+			        echo "Fichier : $1"
+			        echo "___________________________________________________________________________________"
+			        } >> /home/$USER/.session/Hardlink.log
+		fi
+	fi
+
 done
 
 if [ -d "$1" ]
 then
-        echo "-------> Traitement Dossier $1" >> /home/$USER/.session/inode.log
+        {
+                echo "Date : $(date)"
+	        echo "Type : Suppression du Dossier"
+	        echo "Dossier : $1"
+	}  >> /home/$USER/.session/Hardlink.log
         rmdir "$1"
+
+        if [ -d "$1" ]
+        then
+		{
+                        echo "Date : $(date)"
+		        echo "Type : Erreur de suppression du dossier"
+		        echo "Dossier : $1"
+		        echo "___________________________________________________________________________________"
+		        }  >> /home/$USER/.session/Hardlink.log
+        fi
+
 fi
-echo "-------------------------------------------------------------------" >> /home/$USER/.session/inode.log
+
+printf "_______________________________________________________________________________________\n" >> /home/$USER/.session/Hardlink.log
