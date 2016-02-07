@@ -3,10 +3,10 @@
 while IFS="" read -r utilisateur || [[ -n "$utilisateur" ]]
 do
 
-	mv /home/"$utilisateur"/.rtorrent.rc /home/"$utilisateur"/.rtorrent.rc.bak
-	mv /home/gormson/rtorrent_rc/.rtorrent_"$utilisateur".rc /home/"$utilisateur"/.rtorrent.rc 
+	mkdir /home/"$utilisateur"/torrents/other
+	chown -R "$utilisateur":"$utilisateur" /home/"$utilisateur"/torrents/other
 	
-	service "$utilisateur"-rtorrent restart
-	
+	mkdir /home/"$utilisateur"/termines/other
+	chown -R "$utilisateur":"$utilisateur" /home/"$utilisateur"/termines/other
 
 done < "${1}"
