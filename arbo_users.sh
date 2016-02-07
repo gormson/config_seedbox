@@ -22,6 +22,11 @@ do
 
 	chown -R "$utilisateur":"$utilisateur" "$BASEPATH"/termines/
 	
+	mv /home/"$utilisateur"/.rtorrent.rc /home/"$utilisateur"/.rtorrent.rc.bak
+	mv /home/gormson/rtorrent_rc/.rtorrent_"$utilisateur".rc /home/"$utilisateur"/.rtorrent.rc 
+	
+	service "$utilisateur"-rtorrent restart
+	
 	cp ./scripts/rtorrent_postprocess "$BASEPATH"
 	chown -R "$utilisateur":"$utilisateur" "$BASEPATH"/rtorrent_postprocess
 	chmod +x "$BASEPATH"/rtorrent_postprocess
