@@ -15,9 +15,9 @@
 	printf "\n"
 	printf "# mise à jour des chmod et du groupe.\n"
 	printf "# chmod 775 pour les dossiers et chmod 664 pour les fichiers (obligatoire)\n"
-	printf "find /home/$USER/torrents ! -group web -type f -exec chmod 664 {} \;\n"
-	printf "find /home/$USER/torrents ! -group web -type d -exec chmod 775 {} \;\n"
-	printf "find /home/$USER/torrents ! -group web -exec chown $USER:web {} \;\n"
+	printf "find /home/$USER/termines ! -group web -type f -exec chmod 664 {} \;\n"
+	printf "find /home/$USER/termines ! -group web -type d -exec chmod 775 {} \;\n"
+	printf "find /home/$USER/termines ! -group web -exec chown $USER:web {} \;\n"
 
 	exit 0
 	} > /tmp/file_torrent.sh
@@ -27,9 +27,9 @@ do
 	usermod -aG web "$utilisateur"
 	usermod -aG web www-data
 	
-	chown -R "$utilisateur":web /home/"$utilisateur"/torrents/
-	find /home/"$utilisateur"/torrents/ -type f -exec chmod 664 {} \;
-	find /home/"$utilisateur"/torrents/ -type d -exec chmod 775 {} \;
+	chown -R "$utilisateur":web /home/"$utilisateur"/termines/
+	find /home/"$utilisateur"/termines/ -type f -exec chmod 664 {} \;
+	find /home/"$utilisateur"/termines/ -type d -exec chmod 775 {} \;
 
 	#echo "system.method.set_key = event.download.finished,update_file,\"execute=/home/$utilisateur/.session/file_torrent.sh\"" >> /home/"$utilisateur"/.rtorrent.rc
 	
