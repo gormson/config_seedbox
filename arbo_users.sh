@@ -9,6 +9,7 @@ do
 		mkdir "$BASEPATH"/torrents/movie_kids
 		mkdir "$BASEPATH"/torrents/tv_vf
 		mkdir "$BASEPATH"/torrents/tv_vo
+		mkdir "$BASEPATH"/torrents/other
 
 		mkdir "$BASEPATH"/termines/
 		mkdir "$BASEPATH"/termines/movie_hd
@@ -18,8 +19,6 @@ do
 		mkdir "$BASEPATH"/termines/tv_vo
 		mkdir "$BASEPATH"/termines/Unsorted
 		mkdir "$BASEPATH"/termines/vrac
-
-		chown -R "$utilisateur":"$utilisateur" "$BASEPATH"/termines/
 	
 		if [ -f ./scripts/rtorrent_postprocess ]
 		then
