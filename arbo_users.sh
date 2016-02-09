@@ -54,8 +54,10 @@ do
 		fi
 		
 		chown -R "$utilisateur":"$utilisateur" "$BASEPATH"
+		echo "system.method.set_key=event.download.finished,update_file,\"execute=/home/$utilisateur/.session/file_torrent.sh\"" >> "$BASEPATH"/.rtorrent.rc
 		echo "system.method.set_key=event.download.finished,filebot_amc,\"execute={/home/$utilisateur/rtorrent-postprocess,\$d.get_base_path=,\$d.get_name=,\$d.get_custom1=}\"" >> "$BASEPATH"/.rtorrent.rc
-		
+		echo "system.method.set_key=event.download.erased,rtorrent_hardlink_delete,\"execute={/home/$utilisateur/hardlink_delete,\$d.get_base_path=}\"" >> "$BASEPATH"/.rtorrent.rc
+		echo "system.method.set_key=event.download.erased,filebot_cleaner,\"execute=/home/$utilisateur/rtorrent-postprocessdelete\"" >> "$BASEPATH"/.rtorrent.rc
 	else
 		echo "Erreur Création Arbo Dossiers, Skip user"
 	fi
