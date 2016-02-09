@@ -6,4 +6,4 @@ sh /home/$USER/.filebot/filebot.sh -script fn:cleaner  /home/$USER/termines/tv_v
 sh /home/$USER/.filebot/filebot.sh -script fn:cleaner  /home/$USER/termines/movie_hd &
 sh /home/$USER/.filebot/filebot.sh -script fn:cleaner  /home/$USER/termines/movie_vrac &
 sh /home/$USER/.filebot/filebot.sh -script fn:cleaner  /home/$USER/termines/movie_kids &
-sh /home/$USER/.filebot/filebot.sh -script fn:cleaner  /home/$USER/termines/Unpassed &
+sh /home/$USER/.filebot/filebot.sh -script fn:cleaner  /home/$USER/termines/Unsorted &
