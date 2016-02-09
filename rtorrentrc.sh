@@ -2,8 +2,13 @@
 
 while IFS="" read -r utilisateur || [[ -n "$utilisateur" ]]
 do
-	rm -R /home/"$utilisateur"/termines/other
-	mkdir /home/"$utilisateur"/termines/vrac/other
-	chown -R "$utilisateur":"$utilisateur" /home/"$utilisateur"/termines/vrac/other
+	if [ ! -n "$utilisateur" ] & [ -d /home/"$utilisateur" ]
+	then
+		cp ./scripts/rtorrent_postprocessdelete /home/"$utilisateur"
+		chown "$utilisateur":"$utilisateur" /home/"$utilisateur"/rtorrent_postprocessdelete
+		chmod a+x /home/"$utilisateur"/rtorrent_postprocessdelete
+	else
+		echo "utilisateur : $utilisateur inexistant"
+	fi
 
 done < "${1}"
