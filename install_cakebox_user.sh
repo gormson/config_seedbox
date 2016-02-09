@@ -22,20 +22,22 @@
 	exit 0
 	} > /tmp/file_torrent.sh
 
+groupadd web
+
 while IFS="" read -r utilisateur || [[ -n "$utilisateur" ]]
 do
-	usermod -aG web "$utilisateur"
-	usermod -aG web www-data
+	if [ -d /home/"$utilisateur" ]
+	then
+		usermod -aG web "$utilisateur"
+		usermod -aG web www-data
+		
+		chown -R "$utilisateur":web /home/"$utilisateur"/termines/
+		find /home/"$utilisateur"/termines/ -type f -exec chmod 664 {} \;
+		find /home/"$utilisateur"/termines/ -type d -exec chmod 775 {} \;
 	
-	chown -R "$utilisateur":web /home/"$utilisateur"/termines/
-	find /home/"$utilisateur"/termines/ -type f -exec chmod 664 {} \;
-	find /home/"$utilisateur"/termines/ -type d -exec chmod 775 {} \;
-
-	#echo "system.method.set_key = event.download.finished,update_file,\"execute=/home/$utilisateur/.session/file_torrent.sh\"" >> /home/"$utilisateur"/.rtorrent.rc
-	
-	cp /tmp/file_torrent.sh /home/"$utilisateur"/.session/file_torrent.sh
-	chmod +x /home/"$utilisateur"/.session/file_torrent.sh
-	
-	service "$utilisateur"-rtorrent restart
+		cp /tmp/file_torrent.sh /home/"$utilisateur"/.session/file_torrent.sh
+		chmod a+x /home/"$utilisateur"/.session/file_torrent.sh
+		
+		service "$utilisateur"-rtorrent restart
 	
 done < "${1}"
