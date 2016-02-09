@@ -3,7 +3,8 @@
 while IFS="" read -r utilisateur || [[ -n "$utilisateur" ]]
 do
 	BASEPATH=/home/"$utilisateur"
-	if [ -d $BASEPATH ]
+	if [ -d "$BASEPATH" ]
+	then
 		mkdir "$BASEPATH"/torrents/movie_hd
 		mkdir "$BASEPATH"/torrents/movie_vrac
 		mkdir "$BASEPATH"/torrents/movie_kids
@@ -58,12 +59,14 @@ do
 		if [ -f "$BASEPATH"/.rtorrent.rc ]
 		then
 			cp "$BASEPATH"/.rtorrent.rc "$BASEPATH"/.rtorrent.bak
-			echo "system.method.set_key=event.download.finished,update_file,\"execute=/home/$utilisateur/.session/file_torrent.sh\"" >> "$BASEPATH"/.rtorrent.rc
-			echo "system.method.set_key=event.download.finished,filebot_amc,\"execute={/home/$utilisateur/rtorrent-postprocess,\$d.get_base_path=,\$d.get_name=,\$d.get_custom1=}\"" >> "$BASEPATH"/.rtorrent.rc
-			echo "system.method.set_key=event.download.erased,rtorrent_hardlink_delete,\"execute={/home/$utilisateur/hardlink_delete,\$d.get_base_path=}\"" >> "$BASEPATH"/.rtorrent.rc
-			echo "system.method.set_key=event.download.erased,filebot_cleaner,\"execute=/home/$utilisateur/rtorrent-postprocessdelete\"" >> "$BASEPATH"/.rtorrent.rc
+			{
+				echo "system.method.set_key=event.download.finished,update_file,\"execute=/home/$utilisateur/.session/file_torrent.sh\""
+				echo "system.method.set_key=event.download.finished,filebot_amc,\"execute={/home/$utilisateur/rtorrent-postprocess,\$d.get_base_path=,\$d.get_name=,\$d.get_custom1=}\""
+				echo "system.method.set_key=event.download.erased,rtorrent_hardlink_delete,\"execute={/home/$utilisateur/hardlink_delete,\$d.get_base_path=}\""
+				echo "system.method.set_key=event.download.erased,filebot_cleaner,\"execute=/home/$utilisateur/rtorrent-postprocessdelete\"" 
+				} >> "$BASEPATH"/.rtorrent.rc
 		else
-			echo "Erreur de modification .rtorrent."
+			echo "Erreur de modification .rtorrent.rc"
 		fi
 	else
 		echo "Erreur Création Arbo Dossiers, Skip user"
