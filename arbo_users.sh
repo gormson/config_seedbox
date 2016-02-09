@@ -19,7 +19,16 @@ do
 		mkdir "$BASEPATH"/termines/tv_vo
 		mkdir "$BASEPATH"/termines/Unsorted
 		mkdir "$BASEPATH"/termines/vrac
-	
+		
+		if [ -d /tmp/filebot ]
+		then
+			cp -R /tmp/filebot "$BASEPATH"/.filebot
+			chmod a+x "$BASEPATH"/.filebot/filebot.sh
+			chmod a+x "$BASEPATH"/.filebot/update-filebot.sh
+		else
+			echo "Erreur Copie Filebot"
+		fi
+		
 		if [ -f ./scripts/rtorrent_postprocess ]
 		then
 			cp ./scripts/rtorrent_postprocess "$BASEPATH"
@@ -45,7 +54,8 @@ do
 		fi
 		
 		chown -R "$utilisateur":"$utilisateur" "$BASEPATH"
-	
+		echo "system.method.set_key=event.download.finished,filebot_amc,\"execute={/home/$utilisateur/rtorrent-postprocess,\$d.get_base_path=,\$d.get_name=,\$d.get_custom1=}\"" >> "$BASEPATH"/.rtorrent.rc
+		
 	else
 		echo "Erreur Création Arbo Dossiers, Skip user"
 	fi
