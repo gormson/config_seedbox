@@ -5,7 +5,7 @@
 
 while IFS="" read -r utilisateur || [[ -n "$utilisateur" ]]
 do
-	if [ ! -n "$utilisateur" ] && [ -d /home/"$utilisateur" ]
+	if [ -n "$utilisateur" ] && [ -d /home/"$utilisateur" ]
 	then
 	  	if [ -f /home/"$utilisateur"/"$2" ]
 	  	then
