@@ -16,10 +16,10 @@ do
 	  			chmod a+x /home/"$utilisateur"/"$2"
 	  			chown "$utilisateur":"$utilisateur" /home/"$utilisateur"/"$2"
 	  		else
-	  			printf "Aucun scripts %b dans ./scripts pour %b" "$2" """$utilisateur"
+	  			printf "Aucun scripts %b dans ./scripts pour %b\ı" "$2" """$utilisateur"
 	  		fi
 	  	else
-	  		printf "Le script /home/%b/%b n'existe pas" "$utilisateur" "$2"
+	  		printf "Le script /home/%b/%b n'existe pas\ı" "$utilisateur" "$2"
 	  	fi
 	else
 		echo "utilisateur : $utilisateur inexistant"
