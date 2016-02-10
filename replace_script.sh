@@ -9,7 +9,7 @@ do
 	then
 	  	if [ -f /home/"$utilisateur"/"$2" ]
 	  	then
-	  		mv /home/"$utilisateur"/"$2" ./backups/"$2"_$utilisateur_$(date "+%Y%m%d_%H%M%S")
+	  		mv /home/"$utilisateur"/"$2" ./backups/"$2"_"$utilisateur"_"$(date "+%Y%m%d_%H%M%S")"
 	  		if [ -f ./scripts/"$2" ]
 	  		then
 	  			cp ./scripts/"$2" /home/"$utilisateur"/
