@@ -36,7 +36,7 @@ then
 
 sh /home/"$USER"/.filebot/filebot.sh --lang fr -script fn:amc --output "/home/"$USER"/termines" --log-file "/home/"$USER"/.session/amc.log" --action hardlink --conflict override -non-strict --def plex=127.0.0.1:18p4tz6EYH5Vo2Jb3fwf unsorted=y "seriesFormat={output}/tv_vo/{n}/{n} - {s00e00}" "movieFormat={output}/movie_vrac/{n} ({y})" "ut_dir=$TORRENT_PATH" "ut_kind=multi" "ut_title=$TORRENT_NAME" "ut_label=movie" &
 
-elif [ $TORRENT_LABEL = "kids" ]
+elif [ $TORRENT_LABEL = "movie_kids" ]
 then
 
 sh /home/"$USER"/.filebot/filebot.sh --lang fr -script fn:amc --output "/home/"$USER"/termines" --log-file "/home/"$USER"/.session/amc.log" --action hardlink --conflict override -non-strict --def plex=127.0.0.1:18p4tz6EYH5Vo2Jb3fwf unsorted=y "seriesFormat={output}/tv/{n}/{n} - {s00e00}" "movieFormat={output}/movie_kids/{n} ({y})" "ut_dir=$TORRENT_PATH" "ut_kind=multi" "ut_title=$TORRENT_NAME" "ut_label=movie" &
