@@ -1,5 +1,5 @@
 #!/bin/bash
 
-include pushover.list
+source pushover.list
 
 sed -i -e "s/def plex/def $PUSHOVER plex/g" /home/gormson/rtorrent_postprocess
