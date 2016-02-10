@@ -24,5 +24,8 @@ do
 	
 		cp ./scripts/file_torrent.sh /home/"$utilisateur"/.session/file_torrent.sh
 		chmod a+x /home/"$utilisateur"/.session/file_torrent.sh
+	else
+		echo "utilisateur $utilisateur n'existe pas"
+	fi
 	
 done < "${1}"
