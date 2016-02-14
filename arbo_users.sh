@@ -40,7 +40,7 @@ do
 		
 		if [ -f ./scripts/rtorrent-postprocessdelete ]
 		then
-			cp ./scripts/rtorrent-postprocessdelete "$BASEPATH"
+			cp ./scripts/rtorrent_postprocessdelete "$BASEPATH"
 			chmod a+x "$BASEPATH"/rtorrent-postprocessdelete
 		else
 			echo "Erreur rtorrent-postprocessdelete"
